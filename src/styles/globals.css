@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: "Sora", sans-serif;
+        @apply w-screen min-h-screen max-h-max overflow-x-hidden m-0 border-none p-0 box-border bg-background_color-black_1 text-text_color-white_1;
+    }
+
+    ::-webkit-scrollbar {
+        width: 1rem;
+    }
+
+    ::-webkit-scrollbar-track {
+        border-radius: 0.2rem;
+        background-color: #131517;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 0.2rem;
+        background: #1E1F25;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #2A2B31;
+    }
+
+    * {
+        @apply m-0 border-none p-0 box-border;
+    }
+}
+
+@layer components {
+    .sidebar-list-item-hover:hover::after {
+        position: absolute;
+        right: 0;
+        bottom: -2rem;
+        width: 2rem;
+        height: 2rem;
+        border-top-right-radius: 1rem;
+        box-shadow: 0 -1rem 0 0 #131517;
+        background-color: transparent;
+        content: "";
+    }
+
+    .sidebar-list-item-hover:hover::before {
+        position: absolute;
+        right: 0;
+        top: -2rem;
+        width: 2rem;
+        height: 2rem;
+        border-bottom-right-radius: 1rem;
+        box-shadow: 0 1rem 0 0 #131517;
+        background-color: transparent;
+        content: "";
+    }
+
+    .sidebar-list-item-active::after {
+        position: absolute;
+        right: 0;
+        bottom: -2rem;
+        width: 2rem;
+        height: 2rem;
+        border-top-right-radius: 1rem;
+        box-shadow: 0 -1rem 0 0 #131517;
+        background-color: transparent;
+        content: "";
+    }
+
+    .sidebar-list-item-active::before {
+        position: absolute;
+        right: 0;
+        top: -2rem;
+        width: 2rem;
+        height: 2rem;
+        border-bottom-right-radius: 1rem;
+        box-shadow: 0 1rem 0 0 #131517;
+        background-color: transparent;
+        content: "";
+    }
+}
