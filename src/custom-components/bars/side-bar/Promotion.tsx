@@ -1,3 +1,5 @@
+"use client";
+
 function Promotion() {
   return (
     <div className="w-fit rounded-xl p-4 flex flex-col gap-4 bg-background_color-gray_1">

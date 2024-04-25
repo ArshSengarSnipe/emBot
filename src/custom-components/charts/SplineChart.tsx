@@ -1,3 +1,5 @@
+"use client";
+
 import { SplineChartProps } from "@/types/Props";
 import { useState, useRef, useEffect, useMemo } from "react";
 import {
@@ -40,16 +42,16 @@ function SplineChart({
   background_colors,
   border_color,
 }: SplineChartProps) {
-  const [chartInstance, setChartInstance] = useState<null | Chart<"line">>(
+  const [chartInstance, setChartInstance] = useState<Chart<"line"> | null>(
     null
   );
-  const chartRef = useRef<null | HTMLCanvasElement>(null);
+  const chartRef = useRef<HTMLCanvasElement | null>(null);
   const { Months, Values }: { Months: string[]; Values: number[] } = useMemo<{
     Months: string[];
     Values: number[];
   }>(() => Calculation(data), [data]);
   useEffect(() => {
-    let newChartInstance: null | Chart<"line"> = null;
+    let newChartInstance: Chart<"line"> | null = null;
     if (chartRef.current) {
       if (chartInstance) {
         chartInstance.destroy();

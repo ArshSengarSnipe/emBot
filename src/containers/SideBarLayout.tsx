@@ -1,5 +1,3 @@
-"use client";
-
 import { SideBarLayoutProps } from "@/types/Props";
 import SideBar from "../custom-components/bars/side-bar/SideBar";
 

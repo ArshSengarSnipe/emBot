@@ -1,3 +1,5 @@
+"use client";
+
 import { SearchBarProps } from "@/types/Props";
 import Image from "next/image";
 import SearchIcon from "@/assets/icons/search-icon.svg";

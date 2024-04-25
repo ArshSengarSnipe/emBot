@@ -1,3 +1,5 @@
+"use client";
+
 import { StackedDoughnutChartProps } from "@/types/Props";
 import { useState, useRef, useEffect, useMemo } from "react";
 import {
@@ -48,10 +50,10 @@ function StackedDoughnutChart({
   background_colors,
   border_colors,
 }: StackedDoughnutChartProps) {
-  const [chartInstance, setChartInstance] = useState<null | Chart<"doughnut">>(
+  const [chartInstance, setChartInstance] = useState<Chart<"doughnut"> | null>(
     null
   );
-  const chartRef = useRef<null | HTMLCanvasElement>(null);
+  const chartRef = useRef<HTMLCanvasElement | null>(null);
   const DataSets: ChartDataset<"doughnut", number[]>[] = useMemo<
     ChartDataset<"doughnut", number[]>[]
   >(
@@ -59,7 +61,7 @@ function StackedDoughnutChart({
     [data, background_colors, border_colors]
   );
   useEffect(() => {
-    let newChartInstance: null | Chart<"doughnut"> = null;
+    let newChartInstance: Chart<"doughnut"> | null = null;
     if (chartRef.current) {
       if (chartInstance) {
         chartInstance.destroy();

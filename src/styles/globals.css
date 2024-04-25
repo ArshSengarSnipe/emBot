@@ -34,6 +34,40 @@
 }
 
 @layer components {
+    .loader {
+        width: fit-content;
+        font-size: 2rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-weight: 800;
+        clip-path: inset(0 100% 0 0);
+        animation: loader-animation 2s steps(11) infinite;
+    }
+
+    .loader:before {
+        content: "Loading..."
+    }
+
+    @keyframes loader-animation {
+        to {
+            clip-path: inset(0 -1ch 0 0)
+        }
+    }
+
+    .spinner {
+        aspect-ratio: 1;
+        width: 2rem;
+        border-radius: 50%;
+        background: radial-gradient(farthest-side, #E9E9E9 94%, #0000) top/0.5rem 0.5rem no-repeat, conic-gradient(#0000 30%, #E9E9E9);
+        animation: spinner-animation 1s infinite linear;
+        -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 0.5rem), #000000 0);
+    }
+
+    @keyframes spinner-animation {
+        100% {
+            transform: rotate(1turn)
+        }
+    }
+
     .sidebar-list-item-hover:hover::after {
         position: absolute;
         right: 0;

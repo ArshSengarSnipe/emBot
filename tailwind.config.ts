@@ -39,6 +39,8 @@ const config = {
         button_color: {
           green_1: "#BCE29E",
           green_2: "#6DC956",
+          gray_1: "#2A2B31",
+          gray_2: "#1E1F25",
         },
       },
     },

@@ -1,3 +1,5 @@
+"use client";
+
 import { SideBarListItemProps } from "@/types/Props";
 import { usePathname } from "next/navigation";
 import Link from "next/link";

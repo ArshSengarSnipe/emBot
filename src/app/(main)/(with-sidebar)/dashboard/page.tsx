@@ -1,5 +1,8 @@
 "use client";
 
+import useAuth from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
+import { NextResponse } from "next/server";
 import SearchBar from "@/custom-components/bars/side-bar/SearchBar";
 import AlertIcon from "@/custom-components/icons/AlertIcon";
 import NotificationIcon from "@/assets/icons/notification-icon.svg";
@@ -11,6 +14,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import DropDownIcon from "@/assets/icons/drop-down-icon.svg";
 import Image from "next/image";
@@ -25,6 +29,23 @@ import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 
 function DashboardPage() {
+  const { user, logOut } = useAuth();
+  const router = useRouter();
+  const handleLogOut = async () => {
+    try {
+      await logOut();
+      router.push("/");
+      return NextResponse.json(
+        { message: "Loged Out!", success: true },
+        { status: 200 }
+      );
+    } catch (error) {
+      return NextResponse.json(
+        { error: "Failed to Log Out. Please try again.", success: false },
+        { status: 400 }
+      );
+    }
+  };
   const [date, setDate] = useState<undefined | Date>(new Date());
   return (
     <section className="w-full min-h-screen max-h-max p-8 flex flex-col gap-4">
@@ -38,11 +59,11 @@ function DashboardPage() {
             <AlertIcon src={ChatIcon.src} alt="chat icon" />
           </div>
           <div className="w-fit flex flex-row items-center gap-2">
-            <UserIcon src={DummyUserIcon.src} />
+            <UserIcon src={user?.photoURL ?? DummyUserIcon.src} />
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex flex-row items-center gap-4">
+              <DropdownMenuTrigger className="flex flex-row items-center gap-4 focus:outline-none">
                 <pre className="text-base text-text_color-white_2 font-normal">
-                  {"UIFry.com"}
+                  {user?.email ?? "user@example.com"}
                 </pre>
                 <Image
                   src={DropDownIcon.src}
@@ -52,9 +73,16 @@ function DashboardPage() {
                   priority
                 />
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent className="cursor-pointer">
                 <DropdownMenuLabel className="text-xs text-text_color-white_2 font-extralight">
                   Action
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel
+                  className="text-xs text-text_color-white_1 font-extralight"
+                  onClick={handleLogOut}
+                >
+                  Log Out
                 </DropdownMenuLabel>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -63,7 +91,7 @@ function DashboardPage() {
         <div className="w-full flex flex-col gap-2">
           <div className="w-fit">
             <h1 className="text-4xl text-text_color-white_1 font-extrabold">
-              Hi, {"Abhinav"}!
+              Hi, {user?.displayName ?? "User"}!
             </h1>
           </div>
           <div className="w-full flex flex-row justify-between items-center gap-4">

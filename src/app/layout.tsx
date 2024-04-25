@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Head from "next/head";
 import "@/styles/globals.css";
+import { AuthContextProvider } from "@/contexts/AuthContext";
 
 export const metadata: Metadata = {
   title: "emBot",
@@ -36,7 +37,9 @@ export default function RootLayout({
         />
         <meta property="og:image" content="favicon.ico" />
       </Head>
-      <body className="w-screen min-h-screen max-h-max">{children}</body>
+      <body className="w-screen min-h-screen max-h-max">
+        <AuthContextProvider>{children}</AuthContextProvider>
+      </body>
     </html>
   );
 }
