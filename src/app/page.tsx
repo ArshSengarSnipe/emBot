@@ -15,7 +15,6 @@ export default function HomePage() {
       setShowSpinner(true);
       await signInWithGoogle();
       router.push("/dashboard");
-      setShowSpinner(false);
       return NextResponse.json(
         { message: "Signed In!", success: true },
         { status: 201 }
@@ -25,6 +24,8 @@ export default function HomePage() {
         { error: "Failed to Sign In. Please try again.", success: false },
         { status: 400 }
       );
+    } finally {
+      setShowSpinner(false);
     }
   };
   return (

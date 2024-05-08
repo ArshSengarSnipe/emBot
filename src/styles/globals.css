@@ -68,30 +68,6 @@
         }
     }
 
-    .sidebar-list-item-hover:hover::after {
-        position: absolute;
-        right: 0;
-        bottom: -2rem;
-        width: 2rem;
-        height: 2rem;
-        border-top-right-radius: 1rem;
-        box-shadow: 0 -1rem 0 0 #131517;
-        background-color: transparent;
-        content: "";
-    }
-
-    .sidebar-list-item-hover:hover::before {
-        position: absolute;
-        right: 0;
-        top: -2rem;
-        width: 2rem;
-        height: 2rem;
-        border-bottom-right-radius: 1rem;
-        box-shadow: 0 1rem 0 0 #131517;
-        background-color: transparent;
-        content: "";
-    }
-
     .sidebar-list-item-active::after {
         position: absolute;
         right: 0;

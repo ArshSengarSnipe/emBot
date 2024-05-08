@@ -20,8 +20,9 @@ function Calculation(
     ...data.map((item, index, items) => item.views)
   );
   maximumViews =
-    maximumViews - (maximumViews / 10) * 10 > maximumViews + 10 - maximumViews
-      ? maximumViews + 10
+    maximumViews - (maximumViews / 10) * 10 >
+    (maximumViews / 10) * 10 + 10 - maximumViews
+      ? (maximumViews / 10) * 10 + 10
       : (maximumViews / 10) * 10;
   let DataSets: ChartDataset<"doughnut", number[]>[] = [];
   for (let index = 0; index < data.length; index++) {

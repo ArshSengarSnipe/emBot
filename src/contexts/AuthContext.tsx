@@ -1,21 +1,18 @@
 "use client";
 
 import { createContext, useState, useEffect } from "react";
+import { User } from "firebase/auth";
 import {
-  User,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { userAuth } from "@/lib/firebase";
-import { NextResponse } from "next/server";
+  signInToGoogle,
+  signOutOfGoogle,
+  onUserChange,
+} from "@/actions/firebase.users.actions";
 
 const AuthContext = createContext({
   user: {} as User | null,
   token: "" as string | undefined,
-  signInWithGoogle: async () => {},
-  logOut: async () => {},
+  signInWithGoogle: () => Promise.resolve(),
+  logOut: () => Promise.resolve(),
 });
 
 function AuthContextProvider({
@@ -24,45 +21,15 @@ function AuthContextProvider({
   children: React.ReactNode;
 }>) {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<undefined | string>(undefined);
+  const [token, setToken] = useState<string | undefined>(undefined);
   const signInWithGoogle = async () => {
-    const googleProvider = new GoogleAuthProvider();
-    userAuth.useDeviceLanguage();
-    await signInWithPopup(userAuth, googleProvider)
-      .then((result) => {
-        const userCredential = GoogleAuthProvider.credentialFromResult(result);
-        const userToken = userCredential?.accessToken;
-        setToken(userToken);
-        return NextResponse.json({ message: "Signed In!" }, { status: 201 });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        const errorCode = error.code;
-        return NextResponse.json(
-          { error: errorMessage },
-          { status: errorCode }
-        );
-      });
+    await signInToGoogle(setToken);
   };
   const logOut = async () => {
-    await signOut(userAuth)
-      .then(() => {
-        setToken(undefined);
-        return NextResponse.json({ message: "Signed Out!" }, { status: 200 });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        const errorCode = error.code;
-        return NextResponse.json(
-          { error: errorMessage },
-          { status: errorCode }
-        );
-      });
+    await signOutOfGoogle(setToken);
   };
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(userAuth, (currentUser) => {
-      setUser(currentUser);
-    });
+    const unsubscribe = onUserChange(setUser);
     return () => unsubscribe();
   }, [user]);
   return (
