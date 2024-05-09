@@ -34,16 +34,10 @@ function DashboardPage() {
   const handleLogOut = async () => {
     try {
       await logOut();
+      console.log("Loged Out!");
       router.push("/");
-      return NextResponse.json(
-        { message: "Loged Out!", success: true },
-        { status: 200 }
-      );
     } catch (error) {
-      return NextResponse.json(
-        { error: "Failed to Log Out. Please try again.", success: false },
-        { status: 400 }
-      );
+      console.log("Failed to Log Out! Please try again.");
     }
   };
   const [date, setDate] = useState<undefined | Date>(new Date());

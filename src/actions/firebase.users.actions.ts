@@ -43,7 +43,7 @@ export async function signOutOfGoogle(
     });
 }
 
-export function onUserChange(setUser: Dispatch<User | null>): any {
+export function onUserChange(setUser: Dispatch<User | null>): () => void {
   return onAuthStateChanged(userAuth, (currentUser) => {
     setUser(currentUser);
   });

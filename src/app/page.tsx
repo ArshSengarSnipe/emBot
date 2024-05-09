@@ -14,16 +14,10 @@ export default function HomePage() {
     try {
       setShowSpinner(true);
       await signInWithGoogle();
+      console.log("Signed In!");
       router.push("/dashboard");
-      return NextResponse.json(
-        { message: "Signed In!", success: true },
-        { status: 201 }
-      );
     } catch (error) {
-      return NextResponse.json(
-        { error: "Failed to Sign In. Please try again.", success: false },
-        { status: 400 }
-      );
+      console.log("Failed to Sign In! Please try again.");
     } finally {
       setShowSpinner(false);
     }
