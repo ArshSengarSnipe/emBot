@@ -2,7 +2,6 @@
 
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
-import { NextResponse } from "next/server";
 import SearchBar from "@/custom-components/bars/nav-bar/SearchBar";
 import AlertIcon from "@/custom-components/icons/AlertIcon";
 import NotificationIcon from "@/assets/icons/notification-icon.svg";

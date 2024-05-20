@@ -10,10 +10,10 @@ function MainWithSidebarLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { token } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
   useEffect(() => {
-    if (!token) {
+    if (!user) {
       router.push("/");
     }
   }, []);

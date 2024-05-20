@@ -3,11 +3,10 @@
 import useAuth from "@/hooks/useAuth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { NextResponse } from "next/server";
 import Link from "next/link";
 
 export default function HomePage() {
-  const { token, signInWithGoogle } = useAuth();
+  const { user, signInWithGoogle } = useAuth();
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
   const router = useRouter();
   const handleSignIn = async () => {
@@ -27,7 +26,7 @@ export default function HomePage() {
       <h1 className="text-xl font-extrabold">
         Welcome to emBot, your own Email Copilot!
       </h1>
-      {!token ? (
+      {!user ? (
         <button
           className="rounded-lg px-8 py-2 flex flex-row justify-center items-center gap-2 bg-button_color-gray_1 hover:bg-button_color-gray_2"
           onClick={handleSignIn}

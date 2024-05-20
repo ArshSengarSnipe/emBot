@@ -10,7 +10,6 @@ import {
 
 const AuthContext = createContext({
   user: {} as User | null,
-  token: "" as string | undefined,
   signInWithGoogle: () => Promise.resolve(),
   logOut: () => Promise.resolve(),
 });
@@ -21,19 +20,18 @@ function AuthContextProvider({
   children: React.ReactNode;
 }>) {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | undefined>(undefined);
   const signInWithGoogle = async () => {
-    await signInToGoogle(setToken);
+    await signInToGoogle();
   };
   const logOut = async () => {
-    await signOutOfGoogle(setToken);
+    await signOutOfGoogle();
   };
   useEffect(() => {
     const unsubscribe = onUserChange(setUser);
     return () => unsubscribe();
   }, [user]);
   return (
-    <AuthContext.Provider value={{ user, token, signInWithGoogle, logOut }}>
+    <AuthContext.Provider value={{ user, signInWithGoogle, logOut }}>
       {children}
     </AuthContext.Provider>
   );
