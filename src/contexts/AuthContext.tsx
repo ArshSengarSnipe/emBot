@@ -6,7 +6,7 @@ import {
   signInToGoogle,
   signOutOfGoogle,
   onUserChange,
-} from "@/actions/firebase.users.actions";
+} from "@/actions/firebase.actions";
 
 const AuthContext = createContext({
   user: {} as User | null,
